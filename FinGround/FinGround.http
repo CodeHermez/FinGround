@@ -1,0 +1,6 @@
+@FinGround_HostAddress = http://localhost:5097
+
+GET {{FinGround_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

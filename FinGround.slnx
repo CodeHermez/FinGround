@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="FinGround.API/FinGround.API.csproj" Id="b60822df-970c-4ec4-9612-79cf99fa444f" />
+  <Project Path="FinGround.Domain/FinGround.Domain.csproj" Id="dd0ce76f-9885-4b8d-9fa8-8b61a1736aee" />
+  <Project Path="FinGround.Infrastructure/FinGround.Infrastructure.csproj" Id="30db4604-1eb4-4cfe-81f5-1efaeb2377f2" />
   <Project Path="FinGround/FinGround.csproj" />
 </Solution>

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Accounts\Commands\Withdraw\" />
+    <Folder Include="Accounts\Queries\GetAccountById\" />
+    <Folder Include="Accounts\Queries\GetAllAccounts\" />
+    <Folder Include="Admin\" />
+    <Folder Include="AuditLogs\" />
+    <Folder Include="Auth\" />
+    <Folder Include="Common\" />
+    <Folder Include="Health\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Transactions\" />
+  </ItemGroup>
+
+</Project>

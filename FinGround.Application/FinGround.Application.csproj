@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Accounts\Queries\GetAccountById\" />
-    <Folder Include="Accounts\Queries\GetAllAccounts\" />
     <Folder Include="Admin\" />
     <Folder Include="AuditLogs\" />
     <Folder Include="Auth\" />

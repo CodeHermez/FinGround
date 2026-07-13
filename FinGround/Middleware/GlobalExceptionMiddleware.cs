@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Text.Json;
-using BankingApiSandbox.Application.Common.Exceptions;
-using BankingApiSandbox.Domain.Exceptions;
+using FinGround.Application.Common.Exceptions;
+using FinGround.Domain.Exceptions;
 
-namespace BankingApiSandbox.API.Middleware;
+namespace FinGround.API.Middleware;
 
 public class GlobalExceptionMiddleware
 {

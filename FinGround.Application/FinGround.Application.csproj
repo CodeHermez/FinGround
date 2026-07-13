@@ -8,7 +8,8 @@
 
   <ItemGroup>
     <Folder Include="AuditLogs\" />
-    <Folder Include="Auth\" />
+    <Folder Include="Auth\Commands\Register\" />
+    <Folder Include="Auth\Common\" />
     <Folder Include="Common\" />
     <Folder Include="Health\" />
     <Folder Include="Interfaces\" />

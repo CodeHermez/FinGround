@@ -6,7 +6,7 @@ namespace FinGround.Application.AuditLogs.Queries.GetAllAuditLogs;
 
 // returns a paginated, optionally-filtered list of all audit log entries
 // across every account, newest first
-// filters (all optional, combinable):
+// filters all optional, combinable:
 //   AccountId   — restrict to one account
 //   Command     — case-insensitive substring match ("Deposit", "Transfer", etc.)
 //   InitiatedBy — case-insensitive substring match on the email/identifier

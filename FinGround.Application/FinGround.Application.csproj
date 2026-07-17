@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Health\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Transactions\" />
   </ItemGroup>
 

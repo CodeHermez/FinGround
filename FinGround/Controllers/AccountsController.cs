@@ -25,13 +25,21 @@ public class AccountsController : ControllerBase
         ?? User.FindFirst("email")?.Value
         ?? User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-    //returns a paginated, optionally-filtered list of accounts.
-    // all filter parameters are optional and combinable:
-    // accountNumber: case-insensitive substring match ("CHK", "SAV", "0001", etc.)
-    // minBalance: only accounts with Balance >= this value
-    //maxBalance: only accounts with Balance &lt;= this value
-    //
-    //pagination defaults: page = 1, pageSize = 20, maximum pageSize = 100
+    /// <summary>
+    /// Returns a paginated, optionally-filtered list of accounts.
+    ///
+    /// All filter parameters are optional and combinable:
+    /// - accountNumber: case-insensitive substring match ("CHK", "SAV", "0001", etc.)
+    /// - minBalance: only accounts with Balance >= this value
+    /// - maxBalance: only accounts with Balance &lt;= this value
+    ///
+    /// Pagination defaults: page = 1, pageSize = 20, maximum pageSize = 100.
+    /// </summary>
+    /// <param name="accountNumber">Substring to match against account number (case-insensitive).</param>
+    /// <param name="minBalance">Minimum balance (inclusive).</param>
+    /// <param name="maxBalance">Maximum balance (inclusive).</param>
+    /// <param name="page">1-based page number (default: 1).</param>
+    /// <param name="pageSize">Items per page, 1–100 (default: 20).</param>
     [HttpGet]
     [ProducesResponseType(typeof(PagedResult<AccountDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll(
@@ -47,7 +55,7 @@ public class AccountsController : ControllerBase
         return Ok(result);
     }
 
-    ///returns a single account by ID.
+    /// <summary>Returns a single account by ID.</summary>
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(AccountDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -57,7 +65,7 @@ public class AccountsController : ControllerBase
         return Ok(result);
     }
 
-    //opens a new bank account.
+    /// <summary>Opens a new bank account.</summary>
     [HttpPost]
     [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -71,7 +79,7 @@ public class AccountsController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id }, id);
     }
 
-    //credits an amount to an account.
+    /// <summary>Credits an amount to an account.</summary>
     [HttpPost("{id:guid}/deposit")]
     [ProducesResponseType(typeof(BalanceResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -84,7 +92,7 @@ public class AccountsController : ControllerBase
         return Ok(new BalanceResponse(id, newBalance));
     }
 
-    //debits an amount from an account.
+    /// <summary>Debits an amount from an account.</summary>
     [HttpPost("{id:guid}/withdraw")]
     [ProducesResponseType(typeof(BalanceResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -99,7 +107,7 @@ public class AccountsController : ControllerBase
     }
 }
 
-// request / response models
+// ── Request / Response models ─────────────────────────────────────────────────
 
 public record CreateAccountRequest(string AccountNumber, decimal InitialBalance);
 public record AmountRequest(decimal Amount);

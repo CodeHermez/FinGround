@@ -31,7 +31,7 @@ public class GlobalExceptionMiddleware
 
     private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        // ── AccountLockedException gets a richer body with lockedUntil ────────
+        //AccountLockedException gets a richer body with lockedUntil
         if (exception is AccountLockedException lockEx)
         {
             const int status = 423; // 423 Locked (RFC 4918)

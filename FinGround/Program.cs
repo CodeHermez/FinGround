@@ -1,10 +1,10 @@
 using System.Text;
 using System.Threading.RateLimiting;
-using BankingApiSandbox.API.Middleware;
-using BankingApiSandbox.Application;
-using BankingApiSandbox.Infrastructure;
-using BankingApiSandbox.Infrastructure.Persistence;
-using BankingApiSandbox.Infrastructure.Persistence.Seeders;
+using FinGround.API.Middleware;
+using FinGround.Application;
+using FinGround.Infrastructure;
+using FinGround.Infrastructure.Persistence;
+using FinGround.Infrastructure.Persistence.Seeders;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
@@ -140,7 +140,7 @@ builder.Services.AddSwaggerGen(c =>
             ## Quick start
 
             1. **POST /api/auth/login** with `{"email":"demo@banking-sandbox.dev","password":"Demo1234!"}` — copy the `token` value.
-            2. Click **Authorize** (🔒) above and enter `Bearer <token>`.
+            2. Click **Authorize** above and enter `Bearer <token>`.
             3. Explore any endpoint — all require authentication except `/api/health*`.
 
             ## Demo seed data

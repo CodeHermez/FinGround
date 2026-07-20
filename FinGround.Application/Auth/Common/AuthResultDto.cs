@@ -1,4 +1,4 @@
-﻿namespace BankingApiSandbox.Application.Auth.Common;
+﻿namespace FinGround.Application.Auth.Common;
 
 public record AuthResultDto(
     Guid UserId,

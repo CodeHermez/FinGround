@@ -10,7 +10,7 @@ Built with ASP.NET Core 10 and Clean Architecture (`Domain` / `Application` / `I
 
 - [PostgreSQL](https://www.postgresql.org/download/) running locally (or reachable from your machine)
 
-- [`dotnet-ef`](https://learn.microsoft.com/ef/core/cli/dotnet) CLI tool — install with:
+- [`dotnet-ef`](https://learn.microsoft.com/ef/core/cli/dotnet) CLI tool  install with:
   
   ```
   dotnet tool install --global dotnet-ef
@@ -44,7 +44,7 @@ Then open [`API/appsettings.json`](API/appsettings.json) and update the `Connect
 }
 ```
 
-Also check the `Jwt` section in the same file — `SecretKey`, `Issuer`, `Audience`, and `ExpiryMinutes` are already filled in with working sandbox defaults, but you can change `SecretKey` to your own value (must be at least 32 characters).
+Also check the `Jwt` section in the same file  `SecretKey`, `Issuer`, `Audience`, and `ExpiryMinutes` are already filled in with working sandbox defaults, but you can change `SecretKey` to your own value (must be at least 32 characters).
 
 ## 3. Apply migrations
 
@@ -69,9 +69,9 @@ cd API
 dotnet run
 ```
 
-On startup the app automatically runs any pending migrations and seeds demo data (see below) if the database is empty, you don't really need a separate seed command.
+On startup, the app automatically runs any pending migrations and seeds demo data (see below). If the database is empty, you don't really need a separate seed command.
 
-The API listens on **http://localhost:5000** (configured via `Urls` in `appsettings.json`), you can change it if that port is already running another process, or kill the process already running (there will be conflict or contention causing the sandbox not to run) on that port using cmd on admin mode, you can look up the cmd commands for that.
+The API listens on **http://localhost:5000** (configured via `Urls` in `appsettings.json`); you can change it if that port is already running another process, or kill the process already running (there will be a conflict or contention causing the sandbox not to run) on that port using cmd on admin mode, you can look up the cmd commands for that.
 
 ## 5. API docs
 
@@ -107,7 +107,7 @@ To create your own login instead of using the demo one, call `POST /api/auth/reg
 | Area         | Route                                                                                               | Notes                                            |
 | ------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
 | Auth         | `POST /api/auth/register`                                                                           | 3 registrations / 10 min per IP                  |
-| Auth         | `POST /api/auth/login`                                                                              | 5 attempts / 60 sec per IP (via. sliding window) |
+| Auth         | `POST /api/auth/login`                                                                              | 5 attempts / 60 sec per IP (via sliding window) |
 | Accounts     | `GET /api/accounts`, `GET /api/accounts/{id}`, `POST /api/accounts`                                 |                                                  |
 | Accounts     | `POST /api/accounts/{id}/deposit`, `POST /api/accounts/{id}/withdraw`                               |                                                  |
 | Transactions | `GET /api/transactions/account/{accountId}`, `POST /api/transactions/transfer`                      |                                                  |
@@ -118,11 +118,11 @@ To create your own login instead of using the demo one, call `POST /api/auth/reg
 | Admin        | `GET /api/admin/accounts/{accountId}/transactions`, `GET /api/admin/accounts/{accountId}/auditlogs` |                                                  |
 | Health       | `GET /api/health`, `GET /api/health/detailed`                                                       | No auth required                                 |
 
-Five consecutive failed login attempts locks a user's account for 15 minutes; an admin can unlock it early via `POST /api/admin/users/{userId}/unlock`.
+Five consecutive failed login attempts lock a user's account for 15 minutes; an admin can unlock it early via `POST /api/admin/users/{userId}/unlock`.
 
 ## Packages used
 
-Installed automatically via `dotnet restore` — listed here for reference, grouped by project:
+Installed automatically via `dotnet restore`  listed here for reference, grouped by project:
 
 **API**
 

@@ -1,7 +1,6 @@
-﻿using .Application.AuditLogs.Queries.ReconcileAccount;
-using FinGround.Application.AuditLogs.Queries.ReconcileAccount;
+﻿using FinGround.Application.AuditLogs.Queries.ReconcileAccount;
 
-namespace .Application.AuditLogs.Queries.ReconcileAllAccounts;
+namespace FinGround.Application.AuditLogs.Queries.ReconcileAllAccounts;
 
 public record AccountReconciliationDto(
     Guid AccountId,

@@ -1,4 +1,5 @@
-﻿namespace FinGround.Domain.Entities;
+﻿using FinGround.Domain.Entities;
+namespace FinGround.Domain.Entities;
 
 public class Account
 {

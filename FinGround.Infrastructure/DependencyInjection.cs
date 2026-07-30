@@ -2,8 +2,6 @@
 using FinGround.Application.Interfaces;
 using FinGround.Infrastructure.Persistence;
 using FinGround.Infrastructure.Services;
-using FinGround.Infrastructure.Persistence;
-using FinGround.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

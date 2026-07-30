@@ -3,7 +3,6 @@ using FinGround.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 using System.Security.Principal;
-using System.Transactions;
 
 namespace FinGround.Infrastructure.Persistence;
 

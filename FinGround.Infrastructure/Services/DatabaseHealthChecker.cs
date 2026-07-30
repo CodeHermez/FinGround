@@ -1,6 +1,5 @@
 ﻿using FinGround.Application.Common.Interfaces;
 using FinGround.Infrastructure.Persistence;
-using FinGround.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 

@@ -1,4 +1,4 @@
-﻿namespace FinGroud.Domain.Entities;
+﻿namespace FinGround.Domain.Entities;
 
 public class Transaction
 {

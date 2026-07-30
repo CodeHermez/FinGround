@@ -7,7 +7,6 @@ using FinGround.Application.Transactions.Commands.TransferFunds;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
-using System.Transactions;
 
 namespace FinGround.Application.Transactions.Commands.TransferFunds;
 

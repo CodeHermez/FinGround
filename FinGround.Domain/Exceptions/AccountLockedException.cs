@@ -1,4 +1,4 @@
-﻿namespace FinGroud.Domain.Exceptions;
+﻿namespace FinGround.Domain.Exceptions;
 // thrown when a login attempt is made against an account that has been
 // temporarily locked after too many consecutive failed attempts.
 public class AccountLockedException : Exception

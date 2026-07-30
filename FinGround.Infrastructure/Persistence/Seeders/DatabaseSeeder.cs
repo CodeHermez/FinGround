@@ -4,7 +4,6 @@ using FinGround.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Security.Principal;
-using System.Transactions;
 
 namespace FinGround.Infrastructure.Persistence.Seeders;
 

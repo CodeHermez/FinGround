@@ -10,7 +10,7 @@ Built with ASP.NET Core 10 and Clean Architecture (`Domain` / `Application` / `I
 
 - [PostgreSQL](https://www.postgresql.org/download/) running locally (or reachable from your machine)
 
-- [`dotnet-ef`](https://learn.microsoft.com/ef/core/cli/dotnet) CLI tool — install with:
+- [`dotnet-ef`](https://learn.microsoft.com/ef/core/cli/dotnet) CLI tool -install with:
   
   ```
   dotnet tool install --global dotnet-ef
@@ -44,7 +44,7 @@ Then open [`API/appsettings.json`](API/appsettings.json) and update the `Connect
 }
 ```
 
-Also check the `Jwt` section in the same file — `SecretKey`, `Issuer`, `Audience`, and `ExpiryMinutes` are already filled in with working sandbox defaults, but you can change `SecretKey` to your own value (must be at least 32 characters).
+Also check the `Jwt` section in the same file -`SecretKey`, `Issuer`, `Audience`, and `ExpiryMinutes` are already filled in with working sandbox defaults, but you can change `SecretKey` to your own value (must be at least 32 characters).
 
 ## 3. Apply migrations
 
@@ -122,7 +122,7 @@ Five consecutive failed login attempts locks a user's account for 15 minutes; an
 
 ## Packages used
 
-Installed automatically via `dotnet restore` — listed here for reference, grouped by project:
+Installed automatically via `dotnet restore` -listed here for reference, grouped by project:
 
 **API**
 
@@ -172,7 +172,7 @@ It is a **client of the running API**, not a second way into the database. Every
 | `get_health` | Read-only, no auth required |
 | `create_account`, `deposit` | Writes, non-destructive |
 | `withdraw`, `transfer` | Writes, flagged destructive so MCP clients prompt before running them |
-| `login` | stdio only — caches a token for the session |
+| `login` | stdio only -caches a token for the session |
 
 `/api/admin/*` is deliberately not exposed.
 
@@ -183,9 +183,9 @@ Set in [`McpServer/appsettings.json`](McpServer/appsettings.json), overridable b
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `FinGroundApi__BaseUrl` | `http://localhost:5000` | Where the API is listening |
-| `FinGroundApi__BearerToken` | — | Pre-issued JWT (stdio) |
-| `FinGroundApi__Email` / `__Password` | — | Credentials for automatic login (stdio) |
-| `McpServer__EnableMoneyMovement` | `true` | Set `false` for a strictly read-only server — the write tools are then not registered at all |
+| `FinGroundApi__BearerToken` | -| Pre-issued JWT (stdio) |
+| `FinGroundApi__Email` / `__Password` | -| Credentials for automatic login (stdio) |
+| `McpServer__EnableMoneyMovement` | `true` | Set `false` for a strictly read-only server -the write tools are then not registered at all |
 | `McpServer__MaxTransactionAmount` | `10000` | Rejects larger deposits/withdrawals/transfers before they reach the API |
 | `McpServer__RequireAuth` | `true` | HTTP only: validate the JWT locally too. Needs `Jwt__SecretKey` to match the API's |
 
@@ -193,7 +193,7 @@ Credentials belong in environment variables, not in `appsettings.json`.
 
 ### Running it
 
-**stdio** — for Claude Code, Claude Desktop and other local clients. A [`.mcp.json`](.mcp.json) is checked in at the repo root, so once you have built the solution, Claude Code will offer to connect to the `finground` server on startup:
+**stdio** -for Claude Code, Claude Desktop and other local clients. A [`.mcp.json`](.mcp.json) is checked in at the repo root, so once you have built the solution, Claude Code will offer to connect to the `finground` server on startup:
 
 ```
 dotnet build FinGround.slnx
@@ -207,7 +207,7 @@ To run it by hand:
 dotnet McpServer/bin/Debug/net10.0/McpServer.dll --stdio
 ```
 
-**HTTP** — for remote agents. Serves Streamable HTTP at `/mcp` on port 5050:
+**HTTP** -for remote agents. Serves Streamable HTTP at `/mcp` on port 5050:
 
 ```
 dotnet run --project McpServer
@@ -223,7 +223,7 @@ curl -X POST http://localhost:5050/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
 
-The `login` tool is not exposed over HTTP — there is nothing to log in to when the caller already sends a token.
+The `login` tool is not exposed over HTTP -there is nothing to log in to when the caller already sends a token.
 
 > **Note on MCP clients:** the MCP specification's HTTP authorization flow is OAuth 2.1 with discovery, and FinGround issues its own JWTs from `/api/auth/login` instead. Any client that lets you set a static `Authorization` header (curl, MCP Inspector, most agent frameworks) works; a client that insists on OAuth discovery will not.
 

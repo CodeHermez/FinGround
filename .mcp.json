@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "finground": {
+      "command": "dotnet",
+      "args": [
+        "McpServer/bin/Debug/net10.0/McpServer.dll",
+        "--stdio"
+      ],
+      "env": {
+        "FinGroundApi__BaseUrl": "http://localhost:5000"
+      }
+    }
+  }
+}

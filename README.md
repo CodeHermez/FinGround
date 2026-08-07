@@ -149,6 +149,84 @@ Installed automatically via `dotnet restore` — listed here for reference, grou
 
 - No third-party dependencies.
 
+**McpServer**
+
+- Microsoft.AspNetCore.Authentication.JwtBearer `10.0.10`
+- ModelContextProtocol `2.1.0`
+- ModelContextProtocol.AspNetCore `2.1.0`
+
+## MCP server (for AI agents)
+
+The [`McpServer`](McpServer) project exposes this API to LLM agents over the [Model Context Protocol](https://modelcontextprotocol.io), so a model can query balances, transaction history, audit trails and reconciliation reports, and move money, without anyone hand-writing HTTP calls.
+
+It is a **client of the running API**, not a second way into the database. Every tool call goes out over HTTP with the caller's own JWT attached, so the API's `[Authorize]` checks, role checks, `InitiatedBy` audit identity and error handling all still apply. Start the API first.
+
+### Tools
+
+| Tool | Notes |
+| --- | --- |
+| `list_accounts`, `get_account` | Read-only |
+| `get_account_transactions` | Read-only, filter by amount and date range |
+| `list_audit_logs`, `get_account_audit_logs` | Read-only |
+| `reconcile_account`, `reconcile_all_accounts` | Read-only; the sweep returns only failing accounts unless you ask for all |
+| `get_health` | Read-only, no auth required |
+| `create_account`, `deposit` | Writes, non-destructive |
+| `withdraw`, `transfer` | Writes, flagged destructive so MCP clients prompt before running them |
+| `login` | stdio only — caches a token for the session |
+
+`/api/admin/*` is deliberately not exposed.
+
+### Configuration
+
+Set in [`McpServer/appsettings.json`](McpServer/appsettings.json), overridable by environment variable:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `FinGroundApi__BaseUrl` | `http://localhost:5000` | Where the API is listening |
+| `FinGroundApi__BearerToken` | — | Pre-issued JWT (stdio) |
+| `FinGroundApi__Email` / `__Password` | — | Credentials for automatic login (stdio) |
+| `McpServer__EnableMoneyMovement` | `true` | Set `false` for a strictly read-only server — the write tools are then not registered at all |
+| `McpServer__MaxTransactionAmount` | `10000` | Rejects larger deposits/withdrawals/transfers before they reach the API |
+| `McpServer__RequireAuth` | `true` | HTTP only: validate the JWT locally too. Needs `Jwt__SecretKey` to match the API's |
+
+Credentials belong in environment variables, not in `appsettings.json`.
+
+### Running it
+
+**stdio** — for Claude Code, Claude Desktop and other local clients. A [`.mcp.json`](.mcp.json) is checked in at the repo root, so once you have built the solution, Claude Code will offer to connect to the `finground` server on startup:
+
+```
+dotnet build FinGround.slnx
+```
+
+It has no credentials configured by default, so the agent's first call should be the `login` tool (`demo@banking-sandbox.dev` / `Demo1234!`). To skip that, add `FinGroundApi__Email` and `FinGroundApi__Password` to the `env` block in `.mcp.json`.
+
+To run it by hand:
+
+```
+dotnet McpServer/bin/Debug/net10.0/McpServer.dll --stdio
+```
+
+**HTTP** — for remote agents. Serves Streamable HTTP at `/mcp` on port 5050:
+
+```
+dotnet run --project McpServer
+```
+
+Callers supply their own token, exactly as with Swagger:
+
+```
+curl -X POST http://localhost:5050/mcp \
+  -H "Authorization: Bearer <token>" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+```
+
+The `login` tool is not exposed over HTTP — there is nothing to log in to when the caller already sends a token.
+
+> **Note on MCP clients:** the MCP specification's HTTP authorization flow is OAuth 2.1 with discovery, and FinGround issues its own JWTs from `/api/auth/login` instead. Any client that lets you set a static `Authorization` header (curl, MCP Inspector, most agent frameworks) works; a client that insists on OAuth discovery will not.
+
 ## Docker (optional)
 
 A `Dockerfile` is provided at [`API/Dockerfile`](API/Dockerfile) for containerized builds; it still requires a reachable PostgreSQL instance and the same environment config described above.

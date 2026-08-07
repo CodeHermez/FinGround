@@ -4,5 +4,6 @@
     <Project Path="Application/Application.csproj" Id="e3b416bc-a3e4-4a15-a32a-a2b3bc86902a" />
     <Project Path="Domain/Domain.csproj" Id="dd0ce76f-9885-4b8d-9fa8-8b61a1736aee" />
     <Project Path="Infrastructure/Infrastructure.csproj" Id="30db4604-1eb4-4cfe-81f5-1efaeb2377f2" />
+    <Project Path="McpServer/McpServer.csproj" />
   </Folder>
 </Solution>
